@@ -1,16 +1,17 @@
-# Be sure to restart your server when you modify this file.
+LOCALHOST_URL = 'http://localhost:3001'.freeze
+# PRODUCTION_URL = ENV['RESIDENTS_URL'] || 'https://web.pagacontarjeta.cl'.freeze
+# VERCEL_REGEX = %r{^https://non-users-payments-front(-\w+)*(\.|-\w+-comunidad-feliz)\.vercel\.app/?$}
 
-# Avoid CORS issues when API is called from the frontend app.
-# Handle Cross-Origin Resource Sharing (CORS) in order to accept cross-origin Ajax requests.
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  # allow do
+  #   origins VERCEL_REGEX, PRODUCTION_URL
+  #   resource '/', headers: :any, methods: %i[post options]
+  # end
 
-# Read more: https://github.com/cyu/rack-cors
-
-# Rails.application.config.middleware.insert_before 0, Rack::Cors do
-#   allow do
-#     origins "example.com"
-#
-#     resource "*",
-#       headers: :any,
-#       methods: [:get, :post, :put, :patch, :delete, :options, :head]
-#   end
-# end
+  unless Rails.env.production?
+    allow do
+      origins LOCALHOST_URL
+      resource '/', headers: :any, methods: %i[post options]
+    end
+  end
+end

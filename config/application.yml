@@ -1,0 +1,2 @@
+AUTUMN_TOKEN: 'some_string'
+JWT_SECRET_KEY: 'some_string'

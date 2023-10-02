@@ -39,7 +39,7 @@ class User < ApplicationRecord
   validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP, message: :not_valid, allow_blank: true
 
   def fullname
-    "#{name} #{last_name}"
+    "#{self.name} #{self.last_name}"
   end
 
   def verify_phone_and_email
@@ -60,5 +60,10 @@ class User < ApplicationRecord
 
     self.password_salt = BCrypt::Engine.generate_salt
     self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+  end
+
+  def graphql_token
+    payload = { "user-id": id }
+    JWT.encode(payload, ENV['JWT_SECRET_KEY'], 'HS256')
   end
 end

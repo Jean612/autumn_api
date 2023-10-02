@@ -1,3 +1,8 @@
+"""
+An ISO 8601-encoded date
+"""
+scalar ISO8601Date
+
 type Mutation {
   """
   An example field added by the generator
@@ -6,8 +11,21 @@ type Mutation {
 }
 
 type Query {
-  """
-  An example field added by the generator
-  """
-  testField: String!
+  user(
+    """
+    User id
+    """
+    id: ID
+  ): User
+}
+
+type User {
+  birthday: ISO8601Date
+  email: String!
+  fullname: String
+  lastName: String
+  name: String
+  phone: String
+  token: String!
+  verifiedAccount: Boolean
 }

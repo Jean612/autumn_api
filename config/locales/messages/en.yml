@@ -1,0 +1,14 @@
+es:
+  invalid_autumn_token: There was an error with the validation of the Autumn Token.
+  messages:
+    errors:
+      custom:
+        graphql:
+          access_denied: Access denied
+          invalid_action_error: Invalid action
+      scalars:
+        email: The email '%{value}' is not valid
+      users:
+        not_found: User not found
+  not_authorized_error: You don't have the necessary permissions
+  system_error: Oops! Something is not working.
