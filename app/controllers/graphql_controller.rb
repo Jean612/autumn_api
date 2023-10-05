@@ -6,7 +6,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
 
-    raise Errors::Custom::Graphql::AutumnTokenInvalid unless token_valid?
+    raise Errors::Custom::Graphql::NotAuthorized unless token_valid?
 
     context = {
       current_user: current_gql_user,
@@ -16,11 +16,13 @@ class GraphqlController < ApplicationController
     }
 
     result = AutumnApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    render json: result
+    render json: response_format(result, request.headers['Checksum'])
   rescue Errors::Custom::Graphql::AccessDenied => e
     render json: { error: { message: e.message }, data: {} }, status: :forbidden
   rescue Errors::Custom::Graphql::InvalidArgumentError => e
     render json: { errors: [{ message: e.message, extensions: { error_type: :validation } }] }, status: :ok
+  rescue JWT::DecodeError
+    render json: { error: { message: 'Invalid token' }, data: {} }, status: 403
   rescue Errors::Custom::Graphql::NotAuthorized => e
     render json: { error: { message: e.message }, data: {} }, status: :unauthorized
   rescue StandardError => e
@@ -98,12 +100,10 @@ class GraphqlController < ApplicationController
 
     begin
       decoded_token = JWT.decode(request.headers['JWTACCESSTOKEN'], ENV['JWT_SECRET_KEY'], true, { algorithm: 'HS256' }).shift
-    rescue JWT::ExpiredSignature
-      render json: { error: { message: 'Expired token' }, data: {} }, status: 403
-      return
-    rescue JWT::DecodeError
-      render json: { error: { message: 'Invalid token' }, data: {} }, status: 403
-      return
+    rescue JWT::ExpiredSignature => _e
+      raise Errors::Custom::Graphql::AccessDenied, I18n.t('messages.errors.jwt.expired_token')
+    rescue JWT::DecodeError => _e
+      raise Errors::Custom::Graphql::AccessDenied, I18n.t('messages.errors.jwt.invalid_token')
     end
 
     user_id_from_token = decoded_token['user-id']

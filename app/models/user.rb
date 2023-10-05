@@ -8,6 +8,7 @@
 #  birthday          :date
 #  email             :string
 #  last_name         :string
+#  last_sign_in_at   :datetime
 #  name              :string
 #  password_hash     :string
 #  password_salt     :string

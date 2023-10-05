@@ -23,6 +23,7 @@ type User {
   birthday: ISO8601Date
   email: String!
   fullname: String
+  id: ID!
   lastName: String
   name: String
   phone: String

@@ -91,4 +91,8 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  config.before(:suite) do
+    ENV['AUTUMN_TOKEN'] = 'mocked_token'
+    ENV['JWT_SECRET_KEY'] = 'some_string'
+  end
 end

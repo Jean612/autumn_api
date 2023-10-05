@@ -1,3 +1,4 @@
+---
 es:
   invalid_autumn_token: Hubo un error con la validación del Autumn Token
   messages:
@@ -6,9 +7,12 @@ es:
         graphql:
           access_denied: Acceso denegado
           invalid_action_error: Acción inválida
+      jwt:
+        expired_token: Token expirado
+        invalid_token: Token inválido
       scalars:
         email: El correo electrónico '%{value}' no tiene un formato válido
       users:
         not_found: No se encontró el usuario
   not_authorized_error: No tienes los permisos necesarios
-  system_error: ¡Vaya! Algo no está funcionando.
+  system_error: "¡Vaya! Algo no está funcionando."

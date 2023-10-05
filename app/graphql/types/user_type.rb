@@ -2,6 +2,7 @@ module Types
   class UserType < BaseObject
     field :birthday,         GraphQL::Types::ISO8601Date, null: true
     field :email,            String,                      null: false
+    field :id,               ID,                          null: false
     field :last_name,        String,                      null: true
     field :name,             String,                      null: true
     field :fullname,         String,                      null: true
