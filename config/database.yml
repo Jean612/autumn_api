@@ -72,6 +72,6 @@ test:
 #
 production:
   <<: *default
-  database: autumn_api_production
-  username: autumn_api
+  database: <%= ENV['DB_NAME'] || 'autumn_api_production' %>
+  username: <%= ENV['DB_USER'] || 'autumn_api' %>
   password: <%= ENV["AUTUMN_API_DATABASE_PASSWORD"] %>
