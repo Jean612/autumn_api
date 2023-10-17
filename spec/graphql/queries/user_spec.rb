@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe GraphqlController, '#UserQuery', type: :controller do
   include GraphqlHelper
   include_context(:user)
@@ -40,7 +41,7 @@ RSpec.describe GraphqlController, '#UserQuery', type: :controller do
       let(:user_token) { 'invalid_token' }
 
       subject { parsed_response['error']['message'] }
-      it { is_expected.to eq(I18n.t('messages.errors.jwt.invalid_token'))  }
+      it { is_expected.to eq(I18n.t('messages.errors.jwt.invalid_token')) }
     end
   end
 
@@ -49,7 +50,6 @@ RSpec.describe GraphqlController, '#UserQuery', type: :controller do
     let(:variables) { { userId: new_user.id } }
 
     describe 'when user is not admin returns error' do
-
       it_behaves_like 'single error', I18n.t('not_authorized_error') do
         let(:result) { parsed_response }
       end
@@ -65,3 +65,4 @@ RSpec.describe GraphqlController, '#UserQuery', type: :controller do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

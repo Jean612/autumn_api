@@ -14,5 +14,7 @@ en:
         email: The email '%{value}' is not valid
       users:
         not_found: User not found
+        successfully_login: You are successfully logged in!
+        wrong_credentials: An error occurred, please check your data and try again
   not_authorized_error: You don't have the necessary permissions
   system_error: Oops! Something is not working.

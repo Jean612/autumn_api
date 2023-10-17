@@ -1,0 +1,112 @@
+require:
+  - rubocop-graphql
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - staging
+    - test
+
+Layout/LineLength:
+  Max: 200
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+Layout/EmptyLines:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class
+Metrics/MethodLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Max: 100
+  Exclude: ['describe', 'context']
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+Metrics/ClassLength:
+  Max: 1500
+
+Metrics/CyclomaticComplexity:
+  Max: 25
+Metrics/PerceivedComplexity:
+  Max: 25
+Style/SpecialGlobalVars:
+  Enabled: false
+Style/PerlBackrefs:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/SelfAssignment:
+  Enabled: true
+Layout/HashAlignment:
+  Enabled: true
+  AllowMultipleStyles: true
+  EnforcedHashRocketStyle:
+    - key
+    - table
+  EnforcedColonStyle:
+    - table
+    - key
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*'
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+# GraphQL cops settings
+GraphQL/ArgumentDescription: 
+  Enabled: false
+GraphQL/ExtractInputType:
+  MaxArguments: 1
+GraphQL/ExtractType:
+  MaxFields: 4
+GraphQL/FieldDescription:
+  Enabled: false
+GraphQL/FieldHashKey:
+  Enabled: false
+GraphQL/FieldMethod:
+  Enabled: false
+GraphQL/MaxComplexitySchema:
+  Enabled: false
+GraphQL/MaxDepthSchema:
+  Enabled: false
+GraphQL/ObjectDescription:
+  Enabled: false
+GraphQL/ResolverMethodLength: 
+  Max: 100
+
+# Rails cops settings
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+# RSpec cops settings
+RSpec/MultipleMemoizedHelpers:
+  Max: 15

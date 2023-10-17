@@ -10,7 +10,7 @@ module Resolvers
       super
     end
 
-    def resolve(id:)
+    def resolve(id: nil)
       user = id ? User.active.find(id) : context[:current_user]
       raise GraphQL::ExecutionError, I18n.t(:not_authorized_error) unless context[:current_ability]&.can?(:show, user)
 
