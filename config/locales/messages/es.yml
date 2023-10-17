@@ -14,5 +14,7 @@ es:
         email: El correo electrónico '%{value}' no tiene un formato válido
       users:
         not_found: No se encontró el usuario
+        successfully_login: "¡Has iniciado sesión correctamente!"
+        wrong_credentials: Ocurrió un error, verifica tus datos e intenta de nuevo
   not_authorized_error: No tienes los permisos necesarios
   system_error: "¡Vaya! Algo no está funcionando."

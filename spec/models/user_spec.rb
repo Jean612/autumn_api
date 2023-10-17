@@ -48,7 +48,7 @@ RSpec.describe User, type: :model do
     let(:last_name) { Faker::Name.last_name }
     let(:name)      { Faker::Name.first_name }
     let(:password)  { Faker::Internet.password }
-    let(:user)      { create(:user, name: name, last_name: last_name, password: password) }
+    let(:user)      { create(:user, name:, last_name:, password:) }
 
     describe 'valid_password?' do
       it 'should return true when password is valid' do
@@ -65,6 +65,5 @@ RSpec.describe User, type: :model do
         expect(user.fullname).to eq("#{name} #{last_name}")
       end
     end
-
   end
 end
