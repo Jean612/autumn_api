@@ -6,11 +6,9 @@ class Ability
   def initialize(user)
     user ||= User.new # Si el usuario no está autenticado, se crea un usuario ficticio
 
-    can :index, User if user.admin?
-    can :show, User do |u|
-      user.id == u.id || user.admin?
-    end
-    can :update, User, user_id: user.id
+    merge Abilities::Client.new(user) unless user.new_record?
+    merge Abilities::Admin.new(user) if user.admin?
+
     can :new, User
 
     # can :read, Post # Cualquier usuario puede leer posts
