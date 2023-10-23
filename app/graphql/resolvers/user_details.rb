@@ -5,7 +5,8 @@ module Resolvers
     argument :id, ID, 'User id', required: false
 
     def self.authorized(_object, context)
-      raise GraphQL::ExecutionError, I18n.t(:not_authorized_error) unless context[:current_user].present? && context[:current_ability]&.can?(:show, User)
+      raise GraphQL::ExecutionError, I18n.t(:not_authorized_error) unless
+        context[:current_user].present? && context[:current_ability]&.can?(:show, User)
 
       super
     end

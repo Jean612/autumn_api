@@ -23,6 +23,7 @@
 #  index_users_on_email  (email)
 #
 class User < ApplicationRecord
+  # TODO: add gem to validates password
   attr_accessor :password
 
   scope :active, -> { where(active: true) }
@@ -35,12 +36,12 @@ class User < ApplicationRecord
   validate :verify_email_uniqueness
   validates_confirmation_of :password
   validates_presence_of :password, on: :create
-  validates_length_of :password, minimum: 4, allow_blank: true
-  validates :email, presence: :true, uniqueness: { allow_blank: true }
+  validates_length_of :password, minimum: 6, allow_blank: true
+  validates :email, presence: true, uniqueness: { allow_blank: true }
   validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP, message: :not_valid, allow_blank: true
 
   def fullname
-    "#{self.name} #{self.last_name}"
+    "#{name} #{last_name}"
   end
 
   def verify_phone_and_email
