@@ -23,14 +23,14 @@ gem 'money-rails', '~> 1.15'
 # Rails basic default gems
 gem 'bootsnap', '~> 1.16', '>= 1.16.0', require: false
 gem 'puma',     '~> 6.2',  '>= 6.2.1'
-gem "rails", "~> 7.1.0.rc2"
+gem 'rails', '~> 7.1.0.rc2'
 
 # Security and authentication
-gem 'bcrypt',    '~> 3.1', '>= 3.1.18'
-gem 'cancancan', '~> 3.5', '>= 3.5.0'
-gem 'jwt',       '~> 2.7', '>= 2.7.0'
-gem 'rack-cors', '~> 2.0', '>= 2.0.1'
-
+gem 'bcrypt',            '~> 3.1', '>= 3.1.18'
+gem 'cancancan',         '~> 3.5', '>= 3.5.0'
+gem 'jwt',               '~> 2.7', '>= 2.7.0'
+gem 'rack-cors',         '~> 2.0', '>= 2.0.1'
+gem 'strong_password',   '~> 0.0.9'
 # Time
 gem 'tzinfo-data', '~> 1.2023', '>= 1.2023.3', platforms: %i[mingw mswin x64_mingw jruby]
 
